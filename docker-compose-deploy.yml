@@ -14,6 +14,7 @@ services:
       - DB_PASS=${DB_PASS}
       - SECRET_KEY=${DJANGO_SECRET_KEY}
       - ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+      - SUBDIR=${DJANGO_SUBDIR}
     depends_on:
       - db
 
@@ -37,6 +38,8 @@ services:
       - 80:8000
     volumes:
       - static-data:/vol/static
+    environment:
+      - SUBDIR=${DJANGO_SUBDIR}
 
 volumes:
   postgres-data:

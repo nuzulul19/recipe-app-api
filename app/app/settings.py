@@ -132,8 +132,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-MEDIA_URL = '/recipe-app/static/media/'
-STATIC_URL = '/recipe-app/static/static/'
+MEDIA_URL = '/{}/static/media/'.format(os.environ.get('SUBDIR'))
+STATIC_URL = '/{}/static/static/'.format(os.environ.get('SUBDIR'))
 
 MEDIA_ROOT = '/vol/web/media'
 STATIC_ROOT = '/vol/web/static'
@@ -152,3 +152,6 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     'COMPONENT_SPLIT_REQUEST': True,
 }
+
+if os.environ.get('SUBDIR'):
+    SPECTACULAR_SETTINGS['SCHEMA_PATH_PREFIX_INSERT'] = '/{}'.format(os.environ.get('SUBDIR'))
